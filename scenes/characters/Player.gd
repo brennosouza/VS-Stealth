@@ -7,7 +7,10 @@ var speed = 20
 var horizontal_look_sensitivity = 0.004
 var vertical_look_sensitivity = 0.1
 
+var waitfootsteps = false
+
 onready var flashlight = $Camroot/Helper/Camera/flashlightholder/SpotLight
+onready var footstepsplayer = $FootstepsPlayer
 
 
 
@@ -33,21 +36,23 @@ func _ready():
 
 func _physics_process(delta):
 	var direction = Vector3()
+	var velocity = Vector3()
+	var moving = false
 	
 	var h_rot = $Camroot/Helper.global_transform.basis.get_euler().y
 	
 	if Input.is_action_pressed("ui_left"):
 		direction.x = -1 
-		
+		moving = true
 	if Input.is_action_pressed("ui_right"):
 		direction.x = 1
-		
+		moving = true
 	if Input.is_action_pressed("ui_up"):
 		direction.z = -1
-		
+		moving = true
 	if Input.is_action_pressed("ui_down"):
 		direction.z = 1
-	
+		moving = true
 #	direction.y = -1
 	
 	
@@ -58,6 +63,23 @@ func _physics_process(delta):
 	direction = direction.rotated(Vector3.UP, h_rot).normalized()
 	
 	var movement = move_and_slide(direction * speed) 
+	
+	
+	if moving:
+		
+#		if is_on_wall() and velocity == Vector2.ZERO:
+#				pass
+#				audioplayer.play()
+		if is_on_floor():
+			playfootsteps(true)
+		else:
+			playfootsteps(false)
+	
+	
+	
+		
+#	if movement.x != 0 || movement.x != 0:
+#		footstepsplayer.play()
 	
 #	if Input.is_action_just_pressed("flashlight"):
 #		flashlight.visible = !flashlight.visible
@@ -88,9 +110,22 @@ func _unhandled_input(event):
 		
 
 
-
-#		$Camroot.orthonormalize()
+func playfootsteps(wait):
+	if !$FootstepsPlayer.playing:
+		if wait and !waitfootsteps:
+			print_debug("here")
+			$FootstepsPlayer.play()
+			waitfootsteps = true
+			$FootstepsPlayer/Timer.start()
+		elif !wait:
+			$FootstepsPlayer.play()
 		
+		if $FootstepsPlayer.pitch_scale == 1:
+			$FootstepsPlayer.pitch_scale = 1.2
+		else:
+			$FootstepsPlayer.pitch_scale = 1
+
+
 
 
 

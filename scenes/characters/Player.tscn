@@ -1,10 +1,28 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=6 format=2]
 
 [ext_resource path="res://scenes/characters/Player.gd" type="Script" id=1]
+[ext_resource path="res://audio/footstep.wav" type="AudioStream" id=2]
 
 [sub_resource type="CapsuleMesh" id=1]
 
 [sub_resource type="CapsuleShape" id=2]
+
+[sub_resource type="Animation" id=3]
+resource_name = "walking"
+tracks/0/type = "audio"
+tracks/0/path = NodePath("FootstepsPlayer")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"clips": [ {
+"end_offset": 0.0,
+"start_offset": 0.0,
+"stream": null
+} ],
+"times": PoolRealArray( 0.3 )
+}
 
 [node name="KinematicBody" type="KinematicBody"]
 script = ExtResource( 1 )
@@ -33,3 +51,13 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.789622, -1.80119, -6.54031 
 shadow_enabled = true
 shadow_reverse_cull_face = true
 spot_range = 17.3055
+
+[node name="FootstepsPlayer" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource( 2 )
+
+[node name="Timer" type="Timer" parent="FootstepsPlayer"]
+wait_time = 0.6
+one_shot = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/walking = SubResource( 3 )
