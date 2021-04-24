@@ -1,9 +1,12 @@
 extends KinematicBody
 
 #(items para tacar para destrair)
+#objeto/gadget que faz som de pegadas quando ativado
 
-
-var speed = 20
+var gravity_speed = 20
+var walking_speed = 20
+var current_speed = 0
+var run_speed = 40
 var horizontal_look_sensitivity = 0.004
 var vertical_look_sensitivity = 0.1
 
@@ -37,7 +40,9 @@ func _ready():
 func _physics_process(delta):
 	var direction = Vector3()
 	var velocity = Vector3()
+	var gravity = Vector3()
 	var moving = false
+	current_speed = walking_speed
 	
 	var h_rot = $Camroot/Helper.global_transform.basis.get_euler().y
 	
@@ -53,16 +58,21 @@ func _physics_process(delta):
 	if Input.is_action_pressed("ui_down"):
 		direction.z = 1
 		moving = true
-#	direction.y = -1
+	if Input.is_action_pressed("sprint"):
+		current_speed = run_speed
+#		sprinting = true
 	
-	
+	#Gravity
 	if !is_on_floor():
-		direction.y = -1
+		gravity.y = -1
+#		direction.y = -1
 		
 	
 	direction = direction.rotated(Vector3.UP, h_rot).normalized()
 	
-	var movement = move_and_slide(direction * speed) 
+#	velocity = direction 
+	
+	var movement = move_and_slide(direction * current_speed + gravity * gravity_speed) 
 	
 	
 	if moving:
@@ -111,7 +121,14 @@ func _unhandled_input(event):
 
 
 func playfootsteps(wait):
+#	print_debug($FootstepsPlayer/Timer.wait_time)
 	if !$FootstepsPlayer.playing:
+		
+		if current_speed == run_speed:
+				$FootstepsPlayer.unit_db = 2
+				$FootstepsPlayer.unit_size = 3
+				$FootstepsPlayer/Timer.wait_time = 0.3
+				
 		if wait and !waitfootsteps:
 			print_debug("here")
 			$FootstepsPlayer.play()
