@@ -13,8 +13,12 @@ var vertical_look_sensitivity = 0.1
 var waitfootsteps = false
 
 onready var flashlight = $Camroot/Helper/Camera/flashlightholder/SpotLight
-onready var footstepsplayer = $FootstepsPlayer
 
+
+onready var footstepsplayer = $FootstepsPlayer
+var originaldb
+var original_unit_size
+var original_wait_time
 
 
 ## accumulators
@@ -30,7 +34,9 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	originaldb = $FootstepsPlayer.unit_db
+	original_unit_size = $FootstepsPlayer.unit_size
+	original_wait_time = $FootstepsPlayer/Timer.wait_time
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -127,7 +133,12 @@ func playfootsteps(wait):
 		if current_speed == run_speed:
 				$FootstepsPlayer.unit_db = 2
 				$FootstepsPlayer.unit_size = 3
-				$FootstepsPlayer/Timer.wait_time = 0.3
+				$FootstepsPlayer/Timer.wait_time = 0.1
+		else:
+			if $FootstepsPlayer.unit_db != originaldb:
+				$FootstepsPlayer.unit_db = originaldb
+				$FootstepsPlayer.unit_size = original_unit_size
+				$FootstepsPlayer/Timer.wait_time = original_wait_time
 				
 		if wait and !waitfootsteps:
 			print_debug("here")
