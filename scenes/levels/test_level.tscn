@@ -1,0 +1,56 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=1]
+
+[sub_resource type="Environment" id=1]
+
+[sub_resource type="CapsuleMesh" id=2]
+
+[node name="Spatial" type="Spatial"]
+
+[node name="CSGBox" type="CSGBox" parent="."]
+use_collision = true
+width = 46.2684
+height = 4.0
+depth = 47.2945
+
+[node name="CSGBox3" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3684, 0 )
+use_collision = true
+width = 46.2684
+height = 4.0
+depth = 47.2945
+
+[node name="CSGBox4" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 4.36838, 0 )
+use_collision = true
+width = 6.0
+height = 12.0
+depth = 47.2945
+
+[node name="CSGBox2" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.94056, -5 )
+use_collision = true
+height = 7.25832
+
+[node name="OmniLight" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.73888, 0 )
+visible = false
+omni_range = 29.2
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource( 1 )
+
+[node name="KinematicBody" parent="." instance=ExtResource( 1 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.92171, 4.86634 )
+
+[node name="SpotLight" type="SpotLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03704, 7.77766 )
+shadow_enabled = true
+shadow_reverse_cull_face = true
+spot_range = 23.2614
+
+[node name="MeshInstance" type="MeshInstance" parent="."]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
+mesh = SubResource( 2 )
+material/0 = null
