@@ -47,6 +47,12 @@ func _physics_process(delta):
 		
 	if Input.is_action_pressed("ui_down"):
 		direction.z = 1
+	
+#	direction.y = -1
+	
+	
+	if !is_on_floor():
+		direction.y = -1
 		
 	
 	direction = direction.rotated(Vector3.UP, h_rot).normalized()
