@@ -53,8 +53,8 @@ func _physics_process(delta):
 	
 	var movement = move_and_slide(direction * speed) 
 	
-	if Input.is_action_just_pressed("flashlight"):
-		flashlight.visible = !flashlight.visible
+#	if Input.is_action_just_pressed("flashlight"):
+#		flashlight.visible = !flashlight.visible
 	
 
 
@@ -73,7 +73,11 @@ func _input(event):
 
 #		$Camroot.transform.basis
 #
-		
+
+func _unhandled_input(event):
+	if event.is_action_pressed("flashlight"):
+		flashlight.visible = !flashlight.visible
+			
 		
 		
 
