@@ -25,3 +25,11 @@ shape = SubResource( 2 )
 [node name="Camera" type="ClippedCamera" parent="Camroot/Helper"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.789622, 1.80119, 4.87364 )
 current = true
+
+[node name="flashlightholder" type="Spatial" parent="Camroot/Helper/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.789622, -1.80119, -6.54031 )
+
+[node name="SpotLight" type="SpotLight" parent="Camroot/Helper/Camera/flashlightholder"]
+shadow_enabled = true
+shadow_reverse_cull_face = true
+spot_range = 17.3055

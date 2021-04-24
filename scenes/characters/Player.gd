@@ -9,6 +9,8 @@ var rot_y = 0
 
 var LOOKAROUND_SPEED = 0.2
 
+onready var flashlight = $Camroot/Helper/Camera/flashlightholder/SpotLight
+
 func _init():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
@@ -44,6 +46,9 @@ func _physics_process(delta):
 	
 	var movement = move_and_slide(direction * speed) 
 	
+	if Input.is_action_just_pressed("flashlight"):
+		flashlight.visible = !flashlight.visible
+	
 
 
 	
@@ -53,9 +58,9 @@ func _input(event):
 
 		$Camroot.rotate_y( -event.relative.x /100 )
 		
-		print_debug(clamp($Camroot/Helper.rotation_degrees.x, -50, 50))
+#		print_debug(clamp($Camroot/Helper.rotation_degrees.x, -50, 50))
 
-		$Camroot/Helper.rotation_degrees.x = clamp($Camroot/Helper.rotation_degrees.x + (event.relative.y ), -50,50)
+		$Camroot/Helper.rotation_degrees.x = clamp($Camroot/Helper.rotation_degrees.x - (event.relative.y ), -50,50)
 #		clamp($Camroot/Helper.rotation_degrees.x, -50, 50)
 #		$Camroot/Helper.rotate_x( clamp (event.relative.y / 100, -1, 20) )
 
