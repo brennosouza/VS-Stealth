@@ -1,15 +1,22 @@
 extends KinematicBody
 
+#(items para tacar para destrair)
+
 
 var speed = 20
-
-# accumulators
-var rot_x = 0
-var rot_y = 0
-
-var LOOKAROUND_SPEED = 0.2
+var horizontal_look_sensitivity = 0.004
+var vertical_look_sensitivity = 0.1
 
 onready var flashlight = $Camroot/Helper/Camera/flashlightholder/SpotLight
+
+
+
+## accumulators
+#var rot_x = 0
+#var rot_y = 0
+#
+#var LOOKAROUND_SPEED = 0.2
+
 
 func _init():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -56,11 +63,11 @@ func _input(event):
 	if event is InputEventMouseMotion:
 
 
-		$Camroot.rotate_y( -event.relative.x /100 )
+		$Camroot.rotate_y( -event.relative.x * horizontal_look_sensitivity )
 		
 #		print_debug(clamp($Camroot/Helper.rotation_degrees.x, -50, 50))
 
-		$Camroot/Helper.rotation_degrees.x = clamp($Camroot/Helper.rotation_degrees.x - (event.relative.y ), -50,50)
+		$Camroot/Helper.rotation_degrees.x = clamp($Camroot/Helper.rotation_degrees.x - (event.relative.y * vertical_look_sensitivity ), -50,50)
 #		clamp($Camroot/Helper.rotation_degrees.x, -50, 50)
 #		$Camroot/Helper.rotate_x( clamp (event.relative.y / 100, -1, 20) )
 
