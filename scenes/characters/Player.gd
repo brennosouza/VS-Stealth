@@ -2,6 +2,7 @@ extends KinematicBody
 
 #(items para tacar para destrair)
 #objeto/gadget que faz som de pegadas quando ativado
+#arma tem muzzle flash
 
 var gravity_speed = 20
 var walking_speed = 20
@@ -9,6 +10,8 @@ var current_speed = 0
 var run_speed = 40
 var horizontal_look_sensitivity = 0.004
 var vertical_look_sensitivity = 0.1
+
+var angular_acceleration = 7
 
 var waitfootsteps = false
 
@@ -91,8 +94,12 @@ func _physics_process(delta):
 		else:
 			playfootsteps(false)
 	
+	#Rotação de mesh/player, usar se necessário
+	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(direction.x, direction.z) - rotation.y, delta * angular_acceleration)
+#	print_debug($MeshInstance.rotation.y)
 	
-	
+	if Input.is_action_just_pressed("shoot"):
+		$Gun/OmniLight.visible = true
 		
 #	if movement.x != 0 || movement.x != 0:
 #		footstepsplayer.play()

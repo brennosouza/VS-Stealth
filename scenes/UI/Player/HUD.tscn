@@ -1,0 +1,20 @@
+[gd_scene format=2]
+
+[node name="HUD" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="CenterContainer" type="CenterContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Polygon2D" type="Polygon2D" parent="CenterContainer"]
+position = Vector2( 519.913, 293.668 )
+color = Color( 0.623529, 0.623529, 0.623529, 0.34902 )
+polygon = PoolVector2Array( -0.258041, -6.87091, -6.20407, -4.49249, -9.99434, -1.88682, -9.66063, 2.78513, -4.42026, 5.02116, -1.44725, 7.99419, 4.49879, 4.42656, 6.8772, 0.858948, 5.688, -5.0871 )
