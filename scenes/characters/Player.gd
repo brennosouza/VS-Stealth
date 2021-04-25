@@ -102,6 +102,7 @@ func _physics_process(delta):
 		$Camroot/Helper/Camera/Gun/audiobullet.play()
 		
 		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
+		$Camroot/Helper.rotate_x(0.1)
 		
 #	if movement.x != 0 || movement.x != 0:
 #		footstepsplayer.play()
