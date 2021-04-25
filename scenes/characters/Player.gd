@@ -95,12 +95,13 @@ func _physics_process(delta):
 			playfootsteps(false)
 	
 	#Rotação de mesh/player, usar se necessário
-	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(direction.x, direction.z) - rotation.y, delta * angular_acceleration)
+	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(direction.x, direction.z) - $MeshInstance.rotation.y, delta * angular_acceleration)
 #	print_debug($MeshInstance.rotation.y)
 	
 	if Input.is_action_just_pressed("shoot"):
-		$Camroot/Helper/Camera/Gun/OmniLight.visible = true
 		$Camroot/Helper/Camera/Gun/audiobullet.play()
+		
+		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
 		
 #	if movement.x != 0 || movement.x != 0:
 #		footstepsplayer.play()
