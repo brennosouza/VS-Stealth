@@ -99,7 +99,8 @@ func _physics_process(delta):
 #	print_debug($MeshInstance.rotation.y)
 	
 	if Input.is_action_just_pressed("shoot"):
-		$Gun/OmniLight.visible = true
+		$Camroot/Helper/Camera/Gun/OmniLight.visible = true
+		$Camroot/Helper/Camera/Gun/audiobullet.play()
 		
 #	if movement.x != 0 || movement.x != 0:
 #		footstepsplayer.play()

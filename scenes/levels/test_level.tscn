@@ -54,3 +54,7 @@ spot_range = 23.2614
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
 mesh = SubResource( 2 )
 material/0 = null
+
+[node name="OmniLight2" type="OmniLight" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.37579, 1.5874 )
+omni_range = 21.3219
