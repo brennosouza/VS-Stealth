@@ -8,6 +8,8 @@ var gravity_speed = 20
 var walking_speed = 20
 var current_speed = 0
 var run_speed = 40
+var crouching = false
+var crouch_speed = 5
 var horizontal_look_sensitivity = 0.004
 var vertical_look_sensitivity = 0.1
 
@@ -51,6 +53,7 @@ func _physics_process(delta):
 	var velocity = Vector3()
 	var gravity = Vector3()
 	var moving = false
+#	crouching = false
 	current_speed = walking_speed
 	
 	var h_rot = $Camroot/Helper.global_transform.basis.get_euler().y
@@ -69,7 +72,15 @@ func _physics_process(delta):
 		moving = true
 	if Input.is_action_pressed("sprint"):
 		current_speed = run_speed
+		crouching = false
 #		sprinting = true
+	if Input.is_action_just_pressed("crouch"):
+		crouching = !crouching
+		print_debug(crouching)
+	if crouching:
+		current_speed = crouch_speed
+#	if Input.is_action_pressed("crouch"):
+#		current_speed = crouch_speed
 	
 	#Gravity
 	if !is_on_floor():
@@ -84,7 +95,7 @@ func _physics_process(delta):
 	var movement = move_and_slide(direction * current_speed + gravity * gravity_speed) 
 	
 	
-	if moving:
+	if moving and current_speed != crouch_speed:
 		
 #		if is_on_wall() and velocity == Vector2.ZERO:
 #				pass

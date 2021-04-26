@@ -87,6 +87,7 @@ mesh = SubResource( 4 )
 material/0 = null
 
 [node name="OmniLight" type="OmniLight" parent="Camroot/Helper/Camera/Gun"]
+visible = false
 shadow_enabled = true
 
 [node name="audiobullet" type="AudioStreamPlayer3D" parent="Camroot/Helper/Camera/Gun"]
