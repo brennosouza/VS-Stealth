@@ -76,7 +76,7 @@ func _physics_process(delta):
 #		sprinting = true
 	if Input.is_action_just_pressed("crouch"):
 		crouching = !crouching
-		print_debug(crouching)
+#		print_debug(crouching)
 	if crouching:
 		current_speed = crouch_speed
 #	if Input.is_action_pressed("crouch"):

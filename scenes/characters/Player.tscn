@@ -83,6 +83,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6.33317 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Camroot/Helper/Camera/Gun"]
 transform = Transform( 0.120872, 0, 0, 0, -5.28348e-09, 0.120872, 0, -0.120872, -5.28348e-09, 0, 0, 0 )
+visible = false
 mesh = SubResource( 4 )
 material/0 = null
 
