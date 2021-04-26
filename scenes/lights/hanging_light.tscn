@@ -1,0 +1,35 @@
+[gd_scene load_steps=3 format=2]
+
+[sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 1, 1 )
+
+[sub_resource type="ConvexPolygonShape" id=2]
+points = PoolVector3Array( -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, 0.5, 0.5, -0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, -0.5, -0.5, -0.5, 0.5, -0.5, -0.5, -0.5, -0.5, 0.5, 0.5, 0.5, 0.5, -0.5, -0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, 0.5, 0.5, 0.5, -0.5, -0.5, -0.5, -0.5, -0.5, 0.5, -0.5, 0.5, -0.5, -0.5 )
+
+[node name="Spatial" type="Spatial"]
+
+[node name="Top" type="StaticBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52184, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Top"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Top"]
+shape = SubResource( 2 )
+
+[node name="Generic6DOFJoint" type="Generic6DOFJoint" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.837, 0 )
+nodes/node_a = NodePath("../Top")
+nodes/node_b = NodePath("../Light")
+collision/exclude_nodes = false
+
+[node name="Light" type="RigidBody" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0899379, 0 )
+
+[node name="MeshInstance" type="MeshInstance" parent="Light"]
+mesh = SubResource( 1 )
+material/0 = null
+
+[node name="CollisionShape" type="CollisionShape" parent="Light"]
+shape = SubResource( 2 )

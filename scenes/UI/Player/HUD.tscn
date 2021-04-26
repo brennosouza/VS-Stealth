@@ -11,6 +11,7 @@ __meta__ = {
 }
 
 [node name="CrosshairCircle" type="TextureRect" parent="."]
+visible = false
 modulate = Color( 0.243137, 0.878431, 0.992157, 0.670588 )
 anchor_left = 0.5
 anchor_top = 0.5
@@ -28,7 +29,6 @@ __meta__ = {
 }
 
 [node name="CrosshairCross" type="TextureRect" parent="."]
-visible = false
 modulate = Color( 0.839216, 0.780392, 0.780392, 0.670588 )
 anchor_left = 0.5
 anchor_top = 0.5
