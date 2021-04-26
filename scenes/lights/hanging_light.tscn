@@ -23,6 +23,10 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.837, 0 )
 nodes/node_a = NodePath("../Top")
 nodes/node_b = NodePath("../Light")
 collision/exclude_nodes = false
+linear_limit_x/upper_distance = 1.0
+linear_limit_x/lower_distance = -1.0
+angular_limit_x/enabled = false
+angular_limit_z/enabled = false
 
 [node name="Light" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0899379, 0 )
