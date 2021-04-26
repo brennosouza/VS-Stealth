@@ -102,7 +102,10 @@ func _physics_process(delta):
 		$Camroot/Helper/Camera/Gun/audiobullet.play()
 		
 		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
-		$Camroot/Helper.rotate_x(0.1)
+		$Camroot/Helper.rotate_x(0.2)
+		$Camroot.camrot_v += 5
+		
+#		$Camroot/Helper.rotation_degrees.x = lerp($Camroot/Helper.rotation_degrees.x, $Camroot/Helper.rotation_degrees.x-5.05, delta )
 		
 #	if movement.x != 0 || movement.x != 0:
 #		footstepsplayer.play()
@@ -113,15 +116,15 @@ func _physics_process(delta):
 
 
 	
-func _input(event):
-	if event is InputEventMouseMotion:
-
-
-		$Camroot.rotate_y( -event.relative.x * horizontal_look_sensitivity )
+#func _input(event):
+#	if event is InputEventMouseMotion:
+#
+#		$Camroot.rotate_y( -event.relative.x * horizontal_look_sensitivity )
+#		$Camroot/Helper.rotation_degrees.x = clamp($Camroot/Helper.rotation_degrees.x - (event.relative.y * vertical_look_sensitivity ), -50,50)
+		
 		
 #		print_debug(clamp($Camroot/Helper.rotation_degrees.x, -50, 50))
 
-		$Camroot/Helper.rotation_degrees.x = clamp($Camroot/Helper.rotation_degrees.x - (event.relative.y * vertical_look_sensitivity ), -50,50)
 #		clamp($Camroot/Helper.rotation_degrees.x, -50, 50)
 #		$Camroot/Helper.rotate_x( clamp (event.relative.y / 100, -1, 20) )
 
