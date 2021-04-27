@@ -16,7 +16,9 @@ points = PoolVector3Array( 0, 1.1965, 0.06, 0.00588103, 1.1965, 0.0597111, 0.011
 
 [node name="HangingLight" type="Spatial"]
 
-[node name="Top" type="StaticBody" parent="."]
+[node name="Top" type="StaticBody" parent="." groups=[
+"metal",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.52184, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Top"]
@@ -46,7 +48,9 @@ material/0 = null
 [node name="CollisionShape" type="CollisionShape" parent="Rope"]
 shape = SubResource( 4 )
 
-[node name="Light" type="RigidBody" parent="."]
+[node name="Light" type="RigidBody" parent="." groups=[
+"metal",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0899379, 0 )
 
 [node name="MeshInstance" type="MeshInstance" parent="Light"]

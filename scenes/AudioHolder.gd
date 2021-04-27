@@ -1,4 +1,4 @@
-extends Spatial
+extends AudioStreamPlayer3D
 
 
 # Declare member variables here. Examples:
@@ -19,5 +19,5 @@ func _ready():
 func _on_AudioStreamPlayer3D_finished():
 	queue_free()
 	
-func play():
-	$AudioStreamPlayer3D.play()
+#func play():
+#	$AudioStreamPlayer3D.play()

@@ -4,17 +4,18 @@
 [ext_resource path="res://scenes/AudioHolder.gd" type="Script" id=2]
 
 [sub_resource type="CubeMesh" id=1]
+size = Vector3( 1, 1, 1 )
 
-[node name="AudioHolder" type="Spatial"]
-script = ExtResource( 2 )
-
-[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D"]
 stream = ExtResource( 1 )
 unit_db = 10.0
 unit_size = 10.0
+script = ExtResource( 2 )
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
+[node name="AudioHolder" type="Spatial" parent="."]
+
+[node name="MeshInstance" type="MeshInstance" parent="AudioHolder"]
 mesh = SubResource( 1 )
 material/0 = null
 
-[connection signal="finished" from="AudioStreamPlayer3D" to="." method="_on_AudioStreamPlayer3D_finished"]
+[connection signal="finished" from="." to="." method="_on_AudioStreamPlayer3D_finished"]

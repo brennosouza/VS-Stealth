@@ -117,13 +117,15 @@ func _physics_process(delta):
 		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
 		
 		if $Camroot/Helper/Camera/RayCast.is_colliding():
-			print_debug("hy")
-			var bulletsound = tempaudioplayer.instance()
-			get_tree().get_root().add_child(bulletsound)
+#			print_debug("hy")
+			var impactsound = tempaudioplayer.instance()
+			impactsound.global_transform.origin = $Camroot/Helper/Camera/RayCast.get_collision_point()
 			
-			bulletsound.global_transform.origin = $Camroot/Helper/Camera/RayCast.get_collision_point()
+			if $Camroot/Helper/Camera/RayCast.get_collider().is_in_group("metal"):
+				impactsound.stream = preload("res://audio/bullet hit sounds/Bullet Hits/Metal/MetalHit 2.wav")
 			
-			bulletsound.play()
+			get_tree().get_root().add_child(impactsound)
+			impactsound.play()
 			
 		$Camroot/Helper.rotate_x(0.2)
 		$Camroot.camrot_v += 5
