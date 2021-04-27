@@ -38,8 +38,12 @@ linear_limit_x/lower_distance = -1.0
 angular_limit_x/enabled = false
 angular_limit_z/enabled = false
 
-[node name="Rope" type="RigidBody" parent="."]
+[node name="Rope" type="RigidBody" parent="." groups=[
+"rope",
+]]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.77919, 0 )
+collision_layer = 2
+collision_mask = 0
 
 [node name="MeshInstance" type="MeshInstance" parent="Rope"]
 mesh = SubResource( 3 )
