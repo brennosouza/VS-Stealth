@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MetalHit 8.wav-3e8a8c4ba06df2ba603255d5e93ef745.sample"
+
+[deps]
+
+source_file="res://audio/bullet hit sounds/Bullet Hits/Metal/MetalHit 8.wav"
+dest_files=[ "res://.import/MetalHit 8.wav-3e8a8c4ba06df2ba603255d5e93ef745.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

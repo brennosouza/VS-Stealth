@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/FlyBy 1.wav-85b9e81354c479205e12c2151e3da170.sample"
+
+[deps]
+
+source_file="res://audio/bullet hit sounds/Bullet Fly-Bys/FlyBy 1.wav"
+dest_files=[ "res://.import/FlyBy 1.wav-85b9e81354c479205e12c2151e3da170.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

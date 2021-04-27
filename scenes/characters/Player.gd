@@ -25,6 +25,8 @@ var originaldb
 var original_unit_size
 var original_wait_time
 
+var tempaudioplayer = preload("res://scenes/AudioHolder.tscn")
+
 
 ## accumulators
 #var rot_x = 0
@@ -113,6 +115,16 @@ func _physics_process(delta):
 		$Camroot/Helper/Camera/Gun/audiobullet.play()
 		
 		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
+		
+		if $Camroot/Helper/Camera/RayCast.is_colliding():
+			print_debug("hy")
+			var bulletsound = tempaudioplayer.instance()
+			get_tree().get_root().add_child(bulletsound)
+			
+			bulletsound.global_transform.origin = $Camroot/Helper/Camera/RayCast.get_collision_point()
+			
+			bulletsound.play()
+			
 		$Camroot/Helper.rotate_x(0.2)
 		$Camroot.camrot_v += 5
 		

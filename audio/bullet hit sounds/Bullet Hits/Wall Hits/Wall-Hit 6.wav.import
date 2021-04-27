@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Wall-Hit 6.wav-3f5839d6da7a53260ffb20b091b9f54a.sample"
+
+[deps]
+
+source_file="res://audio/bullet hit sounds/Bullet Hits/Wall Hits/Wall-Hit 6.wav"
+dest_files=[ "res://.import/Wall-Hit 6.wav-3f5839d6da7a53260ffb20b091b9f54a.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

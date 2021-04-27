@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/MetalHit 4.wav-cebafb285e24560851953e9d12b2806b.sample"
+
+[deps]
+
+source_file="res://audio/bullet hit sounds/Bullet Hits/Metal/MetalHit 4.wav"
+dest_files=[ "res://.import/MetalHit 4.wav-cebafb285e24560851953e9d12b2806b.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0

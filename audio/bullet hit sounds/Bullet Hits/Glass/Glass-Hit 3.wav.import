@@ -1,0 +1,21 @@
+[remap]
+
+importer="wav"
+type="AudioStreamSample"
+path="res://.import/Glass-Hit 3.wav-99c35c00c2535a2c32a5b450400fd3c4.sample"
+
+[deps]
+
+source_file="res://audio/bullet hit sounds/Bullet Hits/Glass/Glass-Hit 3.wav"
+dest_files=[ "res://.import/Glass-Hit 3.wav-99c35c00c2535a2c32a5b450400fd3c4.sample" ]
+
+[params]
+
+force/8_bit=false
+force/mono=false
+force/max_rate=false
+force/max_rate_hz=44100
+edit/trim=false
+edit/normalize=false
+edit/loop=false
+compress/mode=0
