@@ -130,7 +130,13 @@ func _physics_process(delta):
 			impactsound.play()
 			
 			if collider is RigidBody:
-				collider.apply_impulse(collisionpoint, $Camroot/Helper/Camera/RayCast.get_collision_normal().normalized() * 10) # 5 would be the bullet's speed/strength, get it from a variable if needed
+				print_debug(collisionpoint.normalized())
+#				collider.apply_central_impulse(-$Camroot/Helper/Camera/RayCast.get_collision_normal() * 5 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+				collider.apply_impulse(collisionpoint.normalized(), -$Camroot/Helper/Camera/RayCast.get_collision_normal() * 50 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+#				collider.apply_impulse(collisionpoint, Vector3(-$Camroot/Helper/Camera/RayCast.get_collision_normal().x, -$Camroot/Helper/Camera/RayCast.get_collision_normal().y, -$Camroot/Helper/Camera/RayCast.get_collision_normal().z) * 5 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+				
+			if collider.is_in_group("rope"):
+				collider.get_parent().queue_free()
 			
 		$Camroot/Helper.rotate_x(0.2)
 		$Camroot.camrot_v += 5
