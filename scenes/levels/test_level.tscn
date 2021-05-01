@@ -7,10 +7,10 @@
 
 [sub_resource type="CapsuleMesh" id=2]
 
-[sub_resource type="ConvexPolygonShape" id=4]
+[sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, 1, -1, -1 )
 
-[sub_resource type="CubeMesh" id=3]
+[sub_resource type="CubeMesh" id=4]
 
 [node name="Spatial" type="Spatial"]
 
@@ -74,8 +74,8 @@ mass = 1.64
 can_sleep = false
 
 [node name="CollisionShape" type="CollisionShape" parent="RigidBody"]
-shape = SubResource( 4 )
+shape = SubResource( 3 )
 
 [node name="MeshInstance2" type="MeshInstance" parent="RigidBody"]
-mesh = SubResource( 3 )
+mesh = SubResource( 4 )
 material/0 = null
