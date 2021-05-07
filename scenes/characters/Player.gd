@@ -10,6 +10,7 @@ var current_speed = 0
 var run_speed = 40
 var crouching = false
 var crouch_speed = 5
+export var reloading = false
 var horizontal_look_sensitivity = 0.004
 var vertical_look_sensitivity = 0.1
 
@@ -117,9 +118,12 @@ func _physics_process(delta):
 	#Rotação de mesh/player, usar se necessário
 	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(direction.x, direction.z) - $MeshInstance.rotation.y, delta * angular_acceleration)
 #	print_debug($MeshInstance.rotation.y)
+
+	if Input.is_action_just_pressed("reload"):
+		reload()
 	
 	if Input.is_action_just_pressed("shoot"):
-		if current_ammo > 0:
+		if not reloading and current_ammo > 0:
 			$Camroot/Helper/Camera/Gun/audiobullet.play()
 			
 			$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
@@ -217,9 +221,32 @@ func playfootsteps(wait):
 
 func reload():
 	if current_ammo < mag_size and remaining_mags > 0:
-		reload()
+		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("reload")
+#		reload()
 
-
+func reload_func():
+#	var clip = min(1, remaining_mags/mag_size)
+#	print
+	var how_much_to_reload = mag_size - current_ammo
+	current_ammo += how_much_to_reload
+	remaining_mags = max(0, remaining_mags - how_much_to_reload)
+	print_debug( "remaining mags: " + str(remaining_mags) )
+	print_debug( "how much to reload: " + str(how_much_to_reload) )
+	$HUD/HBoxContainer/labelCurrentAmmo.text = str(current_ammo)
+	$HUD/HBoxContainer/labelAmmoLeft.text = str(remaining_mags)
+#
+##	current_ammo = current
+#
+#	var clip
+#	if remaining_mags >= mag_size:
+#		clip = mag_size
+#		remaining_mags -= mag_size
+#	else:
+#		clip = remaining_mags
+#		remaining_mags -= remaining_mags
+#	current_ammo += clip
+#	remaining_mags -= mag_size
+	
 
 #func _input(event):
 #	if event is InputEventMouseMotion:
