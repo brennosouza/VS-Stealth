@@ -27,6 +27,13 @@ var original_wait_time
 
 var tempaudioplayer = preload("res://scenes/AudioHolder.tscn")
 
+####
+#Ammo and bullet stuff
+var current_ammo = 5
+onready var current_ammo_label = $HUD/HBoxContainer/labelCurrentAmmo
+var mag_size = 5
+var remaining_mags = 10
+
 
 ## accumulators
 #var rot_x = 0
@@ -112,34 +119,38 @@ func _physics_process(delta):
 #	print_debug($MeshInstance.rotation.y)
 	
 	if Input.is_action_just_pressed("shoot"):
-		$Camroot/Helper/Camera/Gun/audiobullet.play()
-		
-		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
-		
-		if $Camroot/Helper/Camera/RayCast.is_colliding():
-			var collider = $Camroot/Helper/Camera/RayCast.get_collider()
-			var collisionpoint = $Camroot/Helper/Camera/RayCast.get_collision_point()
+		if current_ammo > 0:
+			$Camroot/Helper/Camera/Gun/audiobullet.play()
 			
-			var impactsound = tempaudioplayer.instance()
-			impactsound.global_transform.origin = collisionpoint
+			$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
 			
-			if collider.is_in_group("metal"):
-				impactsound.stream = preload("res://audio/bullet hit sounds/Bullet Hits/Metal/MetalHit 2.wav")
+			current_ammo -= 1
+			current_ammo_label.text = str(current_ammo)
 			
-			get_tree().get_root().add_child(impactsound)
-			impactsound.play()
-			
-			if collider is RigidBody:
-				print_debug(collisionpoint.normalized())
-#				collider.apply_central_impulse(-$Camroot/Helper/Camera/RayCast.get_collision_normal() * 5 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
-				collider.apply_impulse(collisionpoint.normalized(), -$Camroot/Helper/Camera/RayCast.get_collision_normal() * 50 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
-#				collider.apply_impulse(collisionpoint, Vector3(-$Camroot/Helper/Camera/RayCast.get_collision_normal().x, -$Camroot/Helper/Camera/RayCast.get_collision_normal().y, -$Camroot/Helper/Camera/RayCast.get_collision_normal().z) * 5 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+			if $Camroot/Helper/Camera/RayCast.is_colliding():
+				var collider = $Camroot/Helper/Camera/RayCast.get_collider()
+				var collisionpoint = $Camroot/Helper/Camera/RayCast.get_collision_point()
 				
-			if collider.is_in_group("rope"):
-				collider.get_parent().queue_free()
-			
-		$Camroot/Helper.rotate_x(0.2)
-		$Camroot.camrot_v += 5
+				var impactsound = tempaudioplayer.instance()
+				impactsound.global_transform.origin = collisionpoint
+				
+				if collider.is_in_group("metal"):
+					impactsound.stream = preload("res://audio/bullet hit sounds/Bullet Hits/Metal/MetalHit 2.wav")
+				
+				get_tree().get_root().add_child(impactsound)
+				impactsound.play()
+				
+				if collider is RigidBody:
+					print_debug(collisionpoint.normalized())
+	#				collider.apply_central_impulse(-$Camroot/Helper/Camera/RayCast.get_collision_normal() * 5 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+					collider.apply_impulse(collisionpoint.normalized(), -$Camroot/Helper/Camera/RayCast.get_collision_normal() * 50 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+	#				collider.apply_impulse(collisionpoint, Vector3(-$Camroot/Helper/Camera/RayCast.get_collision_normal().x, -$Camroot/Helper/Camera/RayCast.get_collision_normal().y, -$Camroot/Helper/Camera/RayCast.get_collision_normal().z) * 5 ) # 5 would be the bullet's speed/strength, get it from a variable if needed
+					
+				if collider.is_in_group("rope"):
+					collider.get_parent().queue_free()
+				
+			$Camroot/Helper.rotate_x(0.2)
+			$Camroot.camrot_v += 5
 		
 #		$Camroot/Helper.rotation_degrees.x = lerp($Camroot/Helper.rotation_degrees.x, $Camroot/Helper.rotation_degrees.x-5.05, delta )
 		
@@ -204,6 +215,9 @@ func playfootsteps(wait):
 
 
 
+func reload():
+	if current_ammo < mag_size and remaining_mags > 0:
+		reload()
 
 
 
