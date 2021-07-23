@@ -19,6 +19,8 @@ var angular_acceleration = 7
 var waitfootsteps = false
 
 onready var flashlight = $Camroot/Helper/Camera/flashlightholder/SpotLight
+onready var nightvision = $NightVisionGrainyAlt
+onready var worldenvironment = $"../WorldEnvironment"
 
 
 onready var footstepsplayer = $FootstepsPlayer
@@ -91,6 +93,15 @@ func _physics_process(delta):
 		current_speed = crouch_speed
 #	if Input.is_action_pressed("crouch"):
 #		current_speed = crouch_speed
+	if Input.is_action_just_pressed("nightvision"):
+		nightvision.visible = !nightvision.visible
+#		$OmniLight.visible = !$OmniLight.visible
+		if nightvision.visible:
+			worldenvironment.environment.ambient_light_color = Color("5a944f")
+		else:
+			worldenvironment.environment.ambient_light_color = Color("000000")
+		
+		
 	
 	#Gravity
 	if !is_on_floor():

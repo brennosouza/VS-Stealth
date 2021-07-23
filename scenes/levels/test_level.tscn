@@ -1,11 +1,17 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=9 format=2]
 
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/lights/hanging_light.tscn" type="PackedScene" id=2]
 
-[sub_resource type="Environment" id=1]
-
 [sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="SpatialMaterial" id=5]
+albedo_color = Color( 1, 0, 0, 1 )
+
+[sub_resource type="SpatialMaterial" id=6]
+albedo_color = Color( 0, 0.109804, 1, 1 )
+
+[sub_resource type="Environment" id=1]
 
 [sub_resource type="ConvexPolygonShape" id=3]
 points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1, -1, -1, 1, -1, 1, -1, -1, -1, 1, 1, 1, -1, 1, -1, 1, 1, -1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, 1, -1, 1, 1, 1, -1, 1, 1, 1, -1, -1, -1, -1, -1, 1, -1, 1, -1, -1 )
@@ -14,35 +20,68 @@ points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1,
 
 [node name="Spatial" type="Spatial"]
 
-[node name="CSGBox" type="CSGBox" parent="."]
+[node name="levelgeometry" type="Spatial" parent="."]
+__meta__ = {
+"_edit_group_": true,
+"_edit_lock_": true
+}
+
+[node name="CSGBox" type="CSGBox" parent="levelgeometry"]
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox3" type="CSGBox" parent="."]
+[node name="CSGBox3" type="CSGBox" parent="levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3684, 0 )
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox4" type="CSGBox" parent="."]
+[node name="CSGBox4" type="CSGBox" parent="levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 4.36838, 0 )
 use_collision = true
 width = 6.0
 height = 12.0
 depth = 47.2945
 
-[node name="CSGBox2" type="CSGBox" parent="."]
+[node name="CSGBox2" type="CSGBox" parent="levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.94056, -5 )
 use_collision = true
 height = 7.25832
 
-[node name="OmniLight" type="OmniLight" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.73888, 0 )
-visible = false
-omni_range = 29.2
+[node name="MeshInstance" type="MeshInstance" parent="levelgeometry"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry"]
+transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -16.7696, 2.84917, -16.7127 )
+material_override = SubResource( 5 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/MeshInstance2"]
+transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 16.0829, -22.037, 1.9352 )
+material_override = SubResource( 5 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/MeshInstance2"]
+transform = Transform( 1, 0, 0, 0, 0.999539, -0.0303464, 0, 0.0303464, 0.999539, 17.6896, -27.5902, 0.33458 )
+material_override = SubResource( 6 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry"]
+transform = Transform( 1, 0, 0, 0, -0.0303465, -0.999539, 0, 0.999539, -0.0303465, -15.1629, 4.44979, -22.2659 )
+material_override = SubResource( 6 )
+mesh = SubResource( 2 )
+material/0 = null
+
+[node name="HangingLight" parent="levelgeometry" instance=ExtResource( 2 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6745, 5.22481, 0 )
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 1 )
@@ -56,17 +95,9 @@ shadow_enabled = true
 shadow_reverse_cull_face = true
 spot_range = 23.2614
 
-[node name="MeshInstance" type="MeshInstance" parent="."]
-transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
-mesh = SubResource( 2 )
-material/0 = null
-
 [node name="OmniLight2" type="OmniLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.37579, 1.5874 )
 omni_range = 21.3219
-
-[node name="HangingLight" parent="." instance=ExtResource( 2 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6745, 5.22481, 0 )
 
 [node name="RigidBody" type="RigidBody" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.62397, 4.07537, 0 )
