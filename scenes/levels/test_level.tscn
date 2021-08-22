@@ -283,6 +283,7 @@ script = ExtResource( 3 )
 [node name="CSGBox6" type="CSGBox" parent="levelgeometry5/door"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0001, 0, 0 )
 use_collision = true
+collision_layer = 513
 width = 5.42888
 height = 7.84391
 depth = 0.876313

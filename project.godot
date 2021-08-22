@@ -94,6 +94,11 @@ interact={
  ]
 }
 
+[layer_names]
+
+3d_physics/layer_5="test"
+3d_physics/layer_10="interactable_areas"
+
 [physics]
 
 common/enable_pause_aware_picking=true

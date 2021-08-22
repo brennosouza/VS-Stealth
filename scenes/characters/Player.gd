@@ -37,7 +37,7 @@ onready var current_ammo_label = $HUD/HBoxContainer/labelCurrentAmmo
 var mag_size = 5
 var remaining_mags = 10
 
-
+onready var interactraycast = $"Camroot/Helper/Camera/InteractRaycast"
 ## accumulators
 #var rot_x = 0
 #var rot_y = 0
@@ -67,6 +67,8 @@ func _physics_process(delta):
 	var moving = false
 #	crouching = false
 	current_speed = walking_speed
+	
+	interact_raycast()
 	
 	var h_rot = $Camroot/Helper.global_transform.basis.get_euler().y
 	
@@ -246,6 +248,16 @@ func reload_func():
 	$HUD/HBoxContainer/labelCurrentAmmo.text = str(current_ammo)
 	$HUD/HBoxContainer/labelAmmoLeft.text = str(remaining_mags)
 #
+
+func interact_raycast():
+	if interactraycast.is_colliding():
+		$HUD.interacttext.visible = true
+		if Input.is_action_just_pressed("interact"):
+			interactraycast.get_collider().get_parent().interact(self)
+	else:
+		if $HUD.interacttext.visible:
+			$HUD.interacttext.visible = false
+
 ##	current_ammo = current
 #
 #	var clip
