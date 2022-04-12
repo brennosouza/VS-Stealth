@@ -22,265 +22,267 @@ points = PoolVector3Array( -1, 1, 1, 1, 1, -1, 1, 1, 1, -1, 1, -1, -1, -1, 1, 1,
 [node name="Spatial" type="Spatial"]
 
 [node name="levelgeometry" type="Spatial" parent="."]
+
+[node name="levelgeometry" type="Spatial" parent="levelgeometry"]
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="CSGBox" type="CSGBox" parent="levelgeometry"]
+[node name="CSGBox" type="CSGBox" parent="levelgeometry/levelgeometry"]
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox3" type="CSGBox" parent="levelgeometry"]
+[node name="CSGBox3" type="CSGBox" parent="levelgeometry/levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3684, 0 )
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox4" type="CSGBox" parent="levelgeometry"]
+[node name="CSGBox4" type="CSGBox" parent="levelgeometry/levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 4.36838, 0 )
 use_collision = true
 width = 6.0
 height = 12.0
 depth = 47.2945
 
-[node name="CSGBox2" type="CSGBox" parent="levelgeometry"]
+[node name="CSGBox2" type="CSGBox" parent="levelgeometry/levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.94056, -5 )
 use_collision = true
 height = 7.25832
 
-[node name="MeshInstance" type="MeshInstance" parent="levelgeometry"]
+[node name="MeshInstance" type="MeshInstance" parent="levelgeometry/levelgeometry"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry"]
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/levelgeometry"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -16.7696, 2.84917, -16.7127 )
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/MeshInstance2"]
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/levelgeometry/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 16.0829, -22.037, 1.9352 )
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/MeshInstance2"]
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/levelgeometry/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, 0.999539, -0.0303464, 0, 0.0303464, 0.999539, 17.6896, -27.5902, 0.33458 )
 material_override = SubResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry"]
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/levelgeometry"]
 transform = Transform( 1, 0, 0, 0, -0.0303465, -0.999539, 0, 0.999539, -0.0303465, -15.1629, 4.44979, -22.2659 )
 material_override = SubResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="HangingLight" parent="levelgeometry" instance=ExtResource( 2 )]
+[node name="HangingLight" parent="levelgeometry/levelgeometry" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6745, 5.22481, 0 )
 
-[node name="levelgeometry2" type="Spatial" parent="."]
+[node name="levelgeometry2" type="Spatial" parent="levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 46.7634 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="CSGBox" type="CSGBox" parent="levelgeometry2"]
+[node name="CSGBox" type="CSGBox" parent="levelgeometry/levelgeometry2"]
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox3" type="CSGBox" parent="levelgeometry2"]
+[node name="CSGBox3" type="CSGBox" parent="levelgeometry/levelgeometry2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3684, 0 )
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox4" type="CSGBox" parent="levelgeometry2"]
+[node name="CSGBox4" type="CSGBox" parent="levelgeometry/levelgeometry2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 4.36838, 0 )
 use_collision = true
 width = 6.0
 height = 12.0
 depth = 47.2945
 
-[node name="CSGBox2" type="CSGBox" parent="levelgeometry2"]
+[node name="CSGBox2" type="CSGBox" parent="levelgeometry/levelgeometry2"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.94056, -5 )
 use_collision = true
 height = 7.25832
 
-[node name="MeshInstance" type="MeshInstance" parent="levelgeometry2"]
+[node name="MeshInstance" type="MeshInstance" parent="levelgeometry/levelgeometry2"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry2"]
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/levelgeometry2"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -16.7696, 2.84917, -16.7127 )
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry2/MeshInstance2"]
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/levelgeometry2/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 16.0829, -22.037, 1.9352 )
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry2/MeshInstance2"]
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/levelgeometry2/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, 0.999539, -0.0303464, 0, 0.0303464, 0.999539, 17.6896, -27.5902, 0.33458 )
 material_override = SubResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry2"]
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/levelgeometry2"]
 transform = Transform( 1, 0, 0, 0, -0.0303465, -0.999539, 0, 0.999539, -0.0303465, -15.1629, 4.44979, -22.2659 )
 material_override = SubResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="HangingLight" parent="levelgeometry2" instance=ExtResource( 2 )]
+[node name="HangingLight" parent="levelgeometry/levelgeometry2" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6745, 5.22481, 0 )
 
-[node name="levelgeometry3" type="Spatial" parent="."]
+[node name="levelgeometry3" type="Spatial" parent="levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, -47.2366 )
 __meta__ = {
 "_edit_group_": true,
 "_edit_lock_": true
 }
 
-[node name="CSGBox" type="CSGBox" parent="levelgeometry3"]
+[node name="CSGBox" type="CSGBox" parent="levelgeometry/levelgeometry3"]
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox3" type="CSGBox" parent="levelgeometry3"]
+[node name="CSGBox3" type="CSGBox" parent="levelgeometry/levelgeometry3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 11.3684, 0 )
 use_collision = true
 width = 46.2684
 height = 4.0
 depth = 47.2945
 
-[node name="CSGBox4" type="CSGBox" parent="levelgeometry3"]
+[node name="CSGBox4" type="CSGBox" parent="levelgeometry/levelgeometry3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -26, 4.36838, 0 )
 use_collision = true
 width = 6.0
 height = 12.0
 depth = 47.2945
 
-[node name="CSGBox2" type="CSGBox" parent="levelgeometry3"]
+[node name="CSGBox2" type="CSGBox" parent="levelgeometry/levelgeometry3"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.94056, -5 )
 use_collision = true
 height = 7.25832
 
-[node name="MeshInstance" type="MeshInstance" parent="levelgeometry3"]
+[node name="MeshInstance" type="MeshInstance" parent="levelgeometry/levelgeometry3"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 2.84917, 0 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry3"]
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/levelgeometry3"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, -16.7696, 2.84917, -16.7127 )
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry3/MeshInstance2"]
+[node name="MeshInstance2" type="MeshInstance" parent="levelgeometry/levelgeometry3/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, -1, -8.74228e-08, 0, 8.74228e-08, -1, 16.0829, -22.037, 1.9352 )
 material_override = SubResource( 2 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry3/MeshInstance2"]
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/levelgeometry3/MeshInstance2"]
 transform = Transform( 1, 0, 0, 0, 0.999539, -0.0303464, 0, 0.0303464, 0.999539, 17.6896, -27.5902, 0.33458 )
 material_override = SubResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry3"]
+[node name="MeshInstance3" type="MeshInstance" parent="levelgeometry/levelgeometry3"]
 transform = Transform( 1, 0, 0, 0, -0.0303465, -0.999539, 0, 0.999539, -0.0303465, -15.1629, 4.44979, -22.2659 )
 material_override = SubResource( 3 )
 mesh = SubResource( 1 )
 material/0 = null
 
-[node name="HangingLight" parent="levelgeometry3" instance=ExtResource( 2 )]
+[node name="HangingLight" parent="levelgeometry/levelgeometry3" instance=ExtResource( 2 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -15.6745, 5.22481, 0 )
 
-[node name="levelgeometry4" type="Spatial" parent="."]
+[node name="levelgeometry4" type="Spatial" parent="levelgeometry"]
 
-[node name="CSGBox" type="CSGBox" parent="levelgeometry4"]
+[node name="CSGBox" type="CSGBox" parent="levelgeometry/levelgeometry4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1791, 5, 0 )
 use_collision = true
 width = 12.0
 height = 16.0
 depth = 4.90204
 
-[node name="CSGBox2" type="CSGBox" parent="levelgeometry4"]
+[node name="CSGBox2" type="CSGBox" parent="levelgeometry/levelgeometry4"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1791, 5, -11 )
 use_collision = true
 width = 12.0
 height = 16.0
 depth = 5.11844
 
-[node name="CSGBox3" type="CSGBox" parent="levelgeometry4"]
+[node name="CSGBox3" type="CSGBox" parent="levelgeometry/levelgeometry4"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 29.1791, 13.7449, -5.39773 )
 use_collision = true
 width = 12.0
 height = 16.0
 
-[node name="CSGBox4" type="CSGBox" parent="levelgeometry4"]
+[node name="CSGBox4" type="CSGBox" parent="levelgeometry/levelgeometry4"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 29.1791, 0.744858, -5.39773 )
 use_collision = true
 width = 12.0
 height = 16.0
 
-[node name="levelgeometry5" type="Spatial" parent="."]
+[node name="levelgeometry5" type="Spatial" parent="levelgeometry"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 12, 0, 0 )
 
-[node name="CSGBox" type="CSGBox" parent="levelgeometry5"]
+[node name="CSGBox" type="CSGBox" parent="levelgeometry/levelgeometry5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1791, 5, 0 )
 use_collision = true
 width = 12.0
 height = 16.0
 depth = 4.90204
 
-[node name="CSGBox5" type="CSGBox" parent="levelgeometry5/CSGBox"]
+[node name="CSGBox5" type="CSGBox" parent="levelgeometry/levelgeometry5/CSGBox"]
 operation = 2
 use_collision = true
 width = 5.42888
 height = 8.72941
 depth = 4.90204
 
-[node name="CSGBox2" type="CSGBox" parent="levelgeometry5"]
+[node name="CSGBox2" type="CSGBox" parent="levelgeometry/levelgeometry5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 29.1791, 5, -11 )
 use_collision = true
 width = 12.0
 height = 16.0
 depth = 5.11844
 
-[node name="CSGBox3" type="CSGBox" parent="levelgeometry5"]
+[node name="CSGBox3" type="CSGBox" parent="levelgeometry/levelgeometry5"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 29.1791, 13.7449, -5.39773 )
 use_collision = true
 width = 12.0
 height = 16.0
 
-[node name="CSGBox4" type="CSGBox" parent="levelgeometry5"]
+[node name="CSGBox4" type="CSGBox" parent="levelgeometry/levelgeometry5"]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 29.1791, 0.744858, -5.39773 )
 use_collision = true
 width = 12.0
 height = 16.0
 
-[node name="door" type="Spatial" parent="levelgeometry5"]
+[node name="door" type="Spatial" parent="levelgeometry/levelgeometry5"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 26.179, 6, 2 )
 script = ExtResource( 3 )
 
-[node name="CSGBox6" type="CSGBox" parent="levelgeometry5/door"]
+[node name="CSGBox6" type="CSGBox" parent="levelgeometry/levelgeometry5/door"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 3.0001, 0, 0 )
 use_collision = true
 collision_layer = 513
