@@ -50,6 +50,10 @@ func _physics_process(delta):
 	
 	velocity = direction.normalized() * move_speed
 	
+	if velocity != Vector3.ZERO:
+		playfootsteps(true)
+		
+	
 #	# Apply gravity.
 	#velocity.y = 0
 	velocity.y += delta * gravity
@@ -57,3 +61,31 @@ func _physics_process(delta):
 	velocity = move_and_slide(velocity, Vector3.UP)
 	
 	
+
+
+func playfootsteps(wait: bool):
+#	print_debug($FootstepsPlayer/Timer.wait_time)
+	if !$FootstepsPlayer.playing:
+		
+#		if current_speed == run_speed:
+#				$FootstepsPlayer.unit_db = 2
+#				$FootstepsPlayer.unit_size = 3
+#				$FootstepsPlayer/Timer.wait_time = 0.1
+#		else:
+#			if $FootstepsPlayer.unit_db != originaldb:
+#				$FootstepsPlayer.unit_db = originaldb
+#				$FootstepsPlayer.unit_size = original_unit_size
+#				$FootstepsPlayer/Timer.wait_time = original_wait_time
+				
+		if wait: #and !waitfootsteps:
+#			print_debug("here")
+			$FootstepsPlayer.play()
+#			waitfootsteps = true
+			$FootstepsPlayer/Timer.start()
+		elif !wait:
+			$FootstepsPlayer.play()
+		
+		if $FootstepsPlayer.pitch_scale == 1:
+			$FootstepsPlayer.pitch_scale = 1.2
+		else:
+			$FootstepsPlayer.pitch_scale = 1
