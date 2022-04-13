@@ -33,11 +33,16 @@ func _physics_process(delta):
 	var direction = target - global_transform.origin
 	
 	#Codigo de virar para a direção sem tween
-#	look_at(global_transform.origin + velocity,Vector3.UP)
+	look_at(global_transform.origin + velocity,Vector3.UP)
+	
+#	global_transform.basis = global_transform.basis.slerp(
+#		global_transform.looking_at(target, Vector3.UP).basis, delta * 5.0 )
+#	rotation_degrees.x = 0
+#	rotation_degrees.z = 0
 
-	var transform_to_rotate = self.global_transform.looking_at(global_transform.origin + velocity,Vector3.UP)
-	tween.interpolate_property(self, "transform:basis", self.transform.basis, transform_to_rotate.basis, fast_rotate_speed, Tween.TRANS_LINEAR, Tween.EASE_IN)
-	tween.start()
+#	var transform_to_rotate = self.global_transform.looking_at(global_transform.origin + velocity,Vector3.UP)
+#	tween.interpolate_property(self, "transform:basis", self.transform.basis, transform_to_rotate.basis, fast_rotate_speed, Tween.TRANS_LINEAR, Tween.EASE_IN)
+#	tween.start()
 	
 	velocity = direction.normalized() * move_speed
 	
