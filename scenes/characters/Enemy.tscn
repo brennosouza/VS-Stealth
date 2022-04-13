@@ -1,8 +1,14 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://scenes/guns/Gun.tscn" type="PackedScene" id=1]
 [ext_resource path="res://audio/footstep.wav" type="AudioStream" id=2]
 [ext_resource path="res://scenes/characters/Enemy.gd" type="Script" id=3]
+
+[sub_resource type="Curve3D" id=7]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 2.75343, 0, -13.2449, 0, 0, 0, 0, 0, 0, 7.31084, 0, 8.49766, 0, 0, 0, 0, 0, 0, -12.9126, 0, 6.50379, 0, 0, 0, 0, 0, 0, -10.6339, 0, -13.6247, 0, 0, 0, 0, 0, 0, 2.75343, 0, -13.2449 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0 )
+}
 
 [sub_resource type="PrismMesh" id=4]
 size = Vector3( 1, 2, 1 )
@@ -25,7 +31,7 @@ albedo_color = Color( 1, 0, 0, 1 )
 [sub_resource type="CapsuleShape" id=3]
 
 [node name="Enemy" type="Path"]
-curve = null
+curve = SubResource( 7 )
 
 [node name="KinematicBody" type="KinematicBody" parent="."]
 script = ExtResource( 3 )
@@ -76,4 +82,5 @@ one_shot = true
 
 [node name="Camera" type="Camera" parent="."]
 transform = Transform( 1.91069e-15, 1, 4.37114e-08, 4.37114e-08, -4.37114e-08, 1, 1, 0, -4.37114e-08, 8.92434, 27.4543, 0 )
+visible = false
 fov = 112.5
