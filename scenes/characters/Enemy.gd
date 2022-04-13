@@ -1,14 +1,20 @@
 extends KinematicBody
 
-var move_speed = 10
+var move_speed = 5
 #export (NodePath) var patrol_path
 var patrol_path
 var patrol_points
 var patrol_index = 0
 var velocity = Vector3.ZERO
 
+export var patrol_rotate_speed = 0.5
+export var fast_rotate_speed = 0.3
+var rotate_speed = patrol_rotate_speed
+
 #var gravity = -100
 onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
+
+onready var tween = $Tween
 
 func _ready():
 	patrol_path = get_parent()
@@ -25,7 +31,14 @@ func _physics_process(delta):
 		target = patrol_points[patrol_index]
 #		target.y = 0
 	var direction = target - global_transform.origin
-	look_at(global_transform.origin + velocity,Vector3.UP)
+	
+	#Codigo de virar para a direção sem tween
+#	look_at(global_transform.origin + velocity,Vector3.UP)
+
+	var transform_to_rotate = self.global_transform.looking_at(global_transform.origin + velocity,Vector3.UP)
+	tween.interpolate_property(self, "transform:basis", self.transform.basis, transform_to_rotate.basis, fast_rotate_speed, Tween.TRANS_LINEAR, Tween.EASE_IN)
+	tween.start()
+	
 	velocity = direction.normalized() * move_speed
 	
 #	# Apply gravity.
