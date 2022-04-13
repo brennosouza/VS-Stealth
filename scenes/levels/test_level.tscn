@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/characters/Player.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/lights/hanging_light.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scripts/door.gd" type="Script" id=3]
+[ext_resource path="res://scenes/characters/Enemy.tscn" type="PackedScene" id=4]
 
 [sub_resource type="CapsuleMesh" id=1]
 
@@ -11,6 +12,12 @@ albedo_color = Color( 1, 0, 0, 1 )
 
 [sub_resource type="SpatialMaterial" id=3]
 albedo_color = Color( 0, 0.109804, 1, 1 )
+
+[sub_resource type="Curve3D" id=7]
+_data = {
+"points": PoolVector3Array( 0, 0, 0, 0, 0, 0, 5.68235, 3.8147e-06, -18.2136, 0, 0, 0, 0, 0, 0, 2.41917, 3.8147e-06, -32.9795, 0, 0, 0, 0, 0, 0, -17.9757, 3.8147e-06, -32.4085, 0, 0, 0, 0, 0, 0, -25.1547, 3.8147e-06, -10.7899, 0, 0, 0, 0, 0, 0, -9.40985, 3.8147e-06, 8.3813, 0, 0, 0, 0, 0, 0, 5.68235, 3.8147e-06, -18.2136 ),
+"tilts": PoolRealArray( 0, 0, 0, 0, 0, 0 )
+}
 
 [sub_resource type="Environment" id=4]
 
@@ -290,10 +297,16 @@ width = 5.42888
 height = 7.84391
 depth = 0.876313
 
+[node name="Enemy" parent="." instance=ExtResource( 4 )]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.13248, 4.57311, 8.69683 )
+curve = SubResource( 7 )
+
+[node name="Enemies" type="Spatial" parent="."]
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
 
-[node name="KinematicBody" parent="." instance=ExtResource( 1 )]
+[node name="Player" parent="." instance=ExtResource( 1 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.92171, 4.86634 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
@@ -307,7 +320,7 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.37579, 1.5874 )
 omni_range = 21.3219
 
 [node name="RigidBody" type="RigidBody" parent="."]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 5.62397, 4.07537, 0 )
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 9.79822, 4.07537, 0 )
 mass = 1.64
 can_sleep = false
 
@@ -317,3 +330,5 @@ shape = SubResource( 5 )
 [node name="MeshInstance2" type="MeshInstance" parent="RigidBody"]
 mesh = SubResource( 6 )
 material/0 = null
+
+[editable path="Enemy"]
