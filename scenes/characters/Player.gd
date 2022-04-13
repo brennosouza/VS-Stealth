@@ -137,6 +137,7 @@ func _physics_process(delta):
 	
 	if Input.is_action_just_pressed("shoot"):
 		if not reloading and current_ammo > 0:
+			$Camroot/Helper/Camera/Gun/emptysound.stop()
 			$Camroot/Helper/Camera/Gun/audiobullet.play()
 			
 			$Camroot/Helper/Camera/Gun/AnimationPlayer.play("muzzle_flash")
@@ -168,6 +169,8 @@ func _physics_process(delta):
 				
 			$Camroot/Helper.rotate_x(0.2)
 			$Camroot.camrot_v += 5
+		elif not reloading and current_ammo <= 0:
+			$Camroot/Helper/Camera/Gun/emptysound.play()
 		
 #		$Camroot/Helper.rotation_degrees.x = lerp($Camroot/Helper.rotation_degrees.x, $Camroot/Helper.rotation_degrees.x-5.05, delta )
 		
@@ -234,6 +237,7 @@ func playfootsteps(wait):
 
 func reload():
 	if current_ammo < mag_size and remaining_mags > 0:
+		$Camroot/Helper/Camera/Gun/emptysound.stop()
 		$Camroot/Helper/Camera/Gun/AnimationPlayer.play("reload")
 #		reload()
 
