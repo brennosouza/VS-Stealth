@@ -5,7 +5,7 @@ var move_speed = 10
 var patrol_path
 var patrol_points
 var patrol_index = 0
-var velocity = Vector2.ZERO
+var velocity = Vector3.ZERO
 
 #var gravity = -100
 onready var gravity = -ProjectSettings.get_setting("physics/3d/default_gravity")
@@ -24,7 +24,9 @@ func _physics_process(delta):
 		patrol_index = wrapi(patrol_index + 1, 0, patrol_points.size())
 		target = patrol_points[patrol_index]
 #		target.y = 0
-	velocity = (target - global_transform.origin).normalized() * move_speed
+	var direction = target - global_transform.origin
+	look_at(global_transform.origin + velocity,Vector3.UP)
+	velocity = direction.normalized() * move_speed
 	
 #	# Apply gravity.
 	#velocity.y = 0
