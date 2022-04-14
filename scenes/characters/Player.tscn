@@ -46,7 +46,6 @@ material/0 = null
 
 [node name="Arrow" type="MeshInstance" parent="MeshInstance"]
 transform = Transform( 1, 1.42109e-14, -3.02971e-15, -1.42109e-14, 1, 1.90739e-07, 1.91851e-14, -1.90739e-07, 1, -1.14911e-07, 1.28526, 5.61806e-08 )
-visible = false
 mesh = SubResource( 8 )
 material/0 = null
 

@@ -315,7 +315,7 @@ depth = 9.10945
 environment = SubResource( 4 )
 
 [node name="Player" parent="." instance=ExtResource( 1 )]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3.92171, 4.86634 )
+transform = Transform( -0.997034, 0, -0.0769627, 0, 1, 0, 0.0769627, 0, -0.997034, 0, 3.92171, 4.86634 )
 
 [node name="SpotLight" type="SpotLight" parent="."]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 5.03704, 7.77766 )

@@ -4,6 +4,8 @@ extends KinematicBody
 #objeto/gadget que faz som de pegadas quando ativado
 #arma tem muzzle flash
 
+var direction = Vector3.ZERO
+var facing
 var gravity_speed = 20
 var walking_speed = 20
 var current_speed = 0
@@ -55,6 +57,7 @@ func _init():
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	facing = $Camroot/Helper.global_transform.basis.z
 	originaldb = $FootstepsPlayer.unit_db
 	original_unit_size = $FootstepsPlayer.unit_size
 	original_wait_time = $FootstepsPlayer/Timer.wait_time
@@ -133,6 +136,8 @@ func _physics_process(delta):
 		
 	
 	direction = direction.rotated(Vector3.UP, h_rot).normalized()
+	if direction != Vector3.ZERO:
+		facing = direction
 	
 #	velocity = direction 
 	
@@ -150,7 +155,8 @@ func _physics_process(delta):
 			playfootsteps(false)
 	
 	#Rotação de mesh/player, usar se necessário
-	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(direction.x, direction.z) - $MeshInstance.rotation.y, delta * angular_acceleration)
+#	if direction != Vector3.ZERO:
+	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(-facing.x, -facing.z) - rotation.y, delta * angular_acceleration)
 #	print_debug($MeshInstance.rotation.y)
 
 	if Input.is_action_just_pressed("reload"):
