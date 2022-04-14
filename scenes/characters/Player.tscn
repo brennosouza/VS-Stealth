@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=13 format=2]
 
 [ext_resource path="res://scenes/characters/Player.gd" type="Script" id=1]
 [ext_resource path="res://audio/footstep.wav" type="AudioStream" id=2]
@@ -12,6 +12,9 @@
 albedo_color = Color( 0.054902, 0, 1, 1 )
 
 [sub_resource type="CapsuleMesh" id=2]
+
+[sub_resource type="PrismMesh" id=8]
+size = Vector3( 1, 1, 0.2 )
 
 [sub_resource type="CapsuleShape" id=3]
 
@@ -41,6 +44,12 @@ material_override = SubResource( 1 )
 mesh = SubResource( 2 )
 material/0 = null
 
+[node name="Arrow" type="MeshInstance" parent="MeshInstance"]
+transform = Transform( 1, 1.42109e-14, -3.02971e-15, -1.42109e-14, 1, 1.90739e-07, 1.91851e-14, -1.90739e-07, 1, -1.14911e-07, 1.28526, 5.61806e-08 )
+visible = false
+mesh = SubResource( 8 )
+material/0 = null
+
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
 shape = SubResource( 3 )
@@ -55,6 +64,33 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.789622, 1.80119, 4.87364 )
 current = true
 margin = 5.0
 process_mode = 1
+
+[node name="CoverRaycasts" type="Spatial" parent="Camroot/Helper/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79, -1.801, -4.16991 )
+
+[node name="LeftCoverRaycast" type="RayCast" parent="Camroot/Helper/Camera/CoverRaycasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66183, 0.777716, -1.126 )
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 4
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
+
+[node name="RightCoverRaycast" type="RayCast" parent="Camroot/Helper/Camera/CoverRaycasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.662, 0.778, -1.126 )
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 4
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
+
+[node name="CoverRaycast" type="RayCast" parent="Camroot/Helper/Camera"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.774635, -1.25276, -5.729 )
+enabled = true
+cast_to = Vector3( 0, 0, -1 )
+collision_mask = 4
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
 
 [node name="flashlightholder" type="Spatial" parent="Camroot/Helper/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.789622, -1.80119, -6.54031 )

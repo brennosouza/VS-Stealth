@@ -303,6 +303,14 @@ depth = 0.876313
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.05293, 16.1458 )
 curve = SubResource( 7 )
 
+[node name="cover" type="CSGBox" parent="."]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 14.5975, 5.43266, 21.0865 )
+use_collision = true
+collision_layer = 5
+collision_mask = 5
+height = 7.10123
+depth = 9.10945
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
 

@@ -44,6 +44,10 @@ onready var interactraycast = $"Camroot/Helper/Camera/InteractRaycast"
 #
 #var LOOKAROUND_SPEED = 0.2
 
+var wallhug_mode = false
+onready var left_cover_raycast : RayCast = $Camroot/Helper/Camera/CoverRaycasts/LeftCoverRaycast 
+onready var right_cover_raycast : RayCast = $Camroot/Helper/Camera/CoverRaycasts/RightCoverRaycast 
+
 
 func _init():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
@@ -73,17 +77,26 @@ func _physics_process(delta):
 	var h_rot = $Camroot/Helper.global_transform.basis.get_euler().y
 	
 	if Input.is_action_pressed("ui_left"):
-		direction.x = -1 
-		moving = true
+		if wallhug_mode and !left_cover_raycast.is_colliding():
+			pass
+		else:
+			direction.x = -1 
+			moving = true
+		
 	if Input.is_action_pressed("ui_right"):
-		direction.x = 1
-		moving = true
+		if wallhug_mode and !right_cover_raycast.is_colliding():
+			pass
+		else:
+			direction.x = 1
+			moving = true
 	if Input.is_action_pressed("ui_up"):
-		direction.z = -1
-		moving = true
+		if !wallhug_mode:
+			direction.z = -1
+			moving = true
 	if Input.is_action_pressed("ui_down"):
-		direction.z = 1
-		moving = true
+		if !wallhug_mode:
+			direction.z = 1
+			moving = true
 	if Input.is_action_pressed("sprint"):
 		current_speed = run_speed
 		crouching = false
@@ -102,6 +115,14 @@ func _physics_process(delta):
 			worldenvironment.environment.ambient_light_color = Color("5a944f")
 		else:
 			worldenvironment.environment.ambient_light_color = Color("000000")
+	if Input.is_action_just_pressed("cover"):
+		if wallhug_mode:
+			wallhug_mode = false
+		if $Camroot/Helper/Camera/CoverRaycast.is_colliding():
+			print_debug($Camroot/Helper/Camera/CoverRaycast.get_collision_normal())
+			print_debug(global_transform.basis.z)
+			wallhug_mode = true
+			
 		
 		
 	
