@@ -297,11 +297,11 @@ width = 5.42888
 height = 7.84391
 depth = 0.876313
 
-[node name="Enemy" parent="." instance=ExtResource( 4 )]
+[node name="Enemies" type="Spatial" parent="."]
+
+[node name="Enemy" parent="Enemies" instance=ExtResource( 4 )]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 4.05293, 16.1458 )
 curve = SubResource( 7 )
-
-[node name="Enemies" type="Spatial" parent="."]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource( 4 )
@@ -331,4 +331,4 @@ shape = SubResource( 5 )
 mesh = SubResource( 6 )
 material/0 = null
 
-[editable path="Enemy"]
+[editable path="Enemies/Enemy"]

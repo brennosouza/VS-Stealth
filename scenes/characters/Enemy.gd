@@ -6,10 +6,14 @@ var patrol_path
 var patrol_points
 var patrol_index = 0
 var velocity = Vector3.ZERO
+var direction = Vector3.ZERO
 
 onready var dummyrotation = $DummyRotation
+
+export var path_wait_time = 2.5
 export var patrol_rotate_speed = 0.5
 export var fast_rotate_speed = 0.3
+
 var rotate_speed = patrol_rotate_speed
 
 #var gravity = -100
@@ -24,14 +28,7 @@ func _ready():
 		
 
 func _physics_process(delta):
-	if !patrol_path:
-		return
-	var target = patrol_points[patrol_index]
-	if global_transform.origin.distance_to(target) < 5:
-		patrol_index = wrapi(patrol_index + 1, 0, patrol_points.size())
-		target = patrol_points[patrol_index]
-#		target.y = 0
-	var direction = target - global_transform.origin
+	patrol_path()
 	
 	#Codigo de virar para a direção sem tween
 #	look_at(global_transform.origin + velocity,Vector3.UP)
@@ -60,7 +57,19 @@ func _physics_process(delta):
 	
 	velocity = move_and_slide(velocity, Vector3.UP)
 	
+
+func patrol_path():
+	if !patrol_path:
+		return
+	var target = patrol_points[patrol_index]
+	direction = target - global_transform.origin
 	
+	if global_transform.origin.distance_to(target) < 5:
+		yield(get_tree().create_timer(path_wait_time), "timeout")
+		patrol_index = wrapi(patrol_index + 1, 0, patrol_points.size())
+		target = patrol_points[patrol_index]
+#		target.y = 0
+
 
 
 func playfootsteps(wait: bool):
