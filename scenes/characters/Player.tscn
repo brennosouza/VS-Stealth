@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://scenes/characters/Player.gd" type="Script" id=1]
 [ext_resource path="res://audio/footstep.wav" type="AudioStream" id=2]
@@ -34,6 +34,17 @@ tracks/0/keys = {
 "times": PoolRealArray( 0.3 )
 }
 
+[sub_resource type="SpatialMaterial" id=10]
+flags_transparent = true
+flags_unshaded = true
+flags_no_depth_test = true
+flags_do_not_receive_shadows = true
+flags_disable_ambient_light = true
+albedo_color = Color( 0.443137, 1, 0.913725, 0.231373 )
+
+[sub_resource type="SphereShape" id=9]
+radius = 50.0
+
 [node name="Player" type="KinematicBody" groups=["player"]]
 transform = Transform( -1, 0, 8.9407e-08, 0, 1, 0, -8.9407e-08, 0, -1, 0, 0, 0 )
 script = ExtResource( 1 )
@@ -42,12 +53,10 @@ script = ExtResource( 1 )
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0 )
 material_override = SubResource( 1 )
 mesh = SubResource( 2 )
-material/0 = null
 
 [node name="Arrow" type="MeshInstance" parent="MeshInstance"]
 transform = Transform( 1, 1.42109e-14, -3.02971e-15, -1.42109e-14, 1, 1.90739e-07, 1.91851e-14, -1.90739e-07, 1, -1.14911e-07, 1.28526, 5.61806e-08 )
 mesh = SubResource( 8 )
-material/0 = null
 
 [node name="CollisionShape" type="CollisionShape" parent="."]
 transform = Transform( 1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 0, 0, 0 )
@@ -63,25 +72,6 @@ transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0.789622, 1.80119, 4.87364 )
 current = true
 margin = 5.0
 process_mode = 1
-
-[node name="CoverRaycasts" type="Spatial" parent="Camroot/Helper/Camera"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.79, -1.801, -4.16991 )
-
-[node name="LeftCoverRaycast" type="RayCast" parent="Camroot/Helper/Camera/CoverRaycasts"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.66183, 0.777716, -1.126 )
-enabled = true
-cast_to = Vector3( 0, 0, -1 )
-collision_mask = 4
-debug_shape_custom_color = Color( 1, 0, 0, 1 )
-debug_shape_thickness = 5
-
-[node name="RightCoverRaycast" type="RayCast" parent="Camroot/Helper/Camera/CoverRaycasts"]
-transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.662, 0.778, -1.126 )
-enabled = true
-cast_to = Vector3( 0, 0, -1 )
-collision_mask = 4
-debug_shape_custom_color = Color( 1, 0, 0, 1 )
-debug_shape_thickness = 5
 
 [node name="CoverRaycast" type="RayCast" parent="Camroot/Helper/Camera"]
 transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -0.774635, -1.25276, -5.729 )
@@ -123,13 +113,54 @@ one_shot = true
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/walking = SubResource( 7 )
 
-[node name="NightVisionGrainy" parent="." instance=ExtResource( 9 )]
-
-[node name="NightVisionGrainyAlt" parent="." instance=ExtResource( 8 )]
-
 [node name="OmniLight" type="OmniLight" parent="."]
 visible = false
 omni_range = 16.6749
+
+[node name="SoundCircle" type="Spatial" parent="."]
+
+[node name="SoundTorus" type="CSGTorus" parent="SoundCircle"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.298935, 0 )
+inner_radius = 10.0
+outer_radius = 10.2
+material = SubResource( 10 )
+
+[node name="SoundTorusTween" type="Tween" parent="SoundCircle/SoundTorus"]
+
+[node name="SoundArea" type="Area" parent="SoundCircle"]
+
+[node name="SoundCollision" type="CollisionShape" parent="SoundCircle/SoundArea"]
+unique_name_in_owner = true
+shape = SubResource( 9 )
+
+[node name="FloorTypeRayCast" type="RayCast" parent="."]
+unique_name_in_owner = true
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1.2, 0 )
+enabled = true
+debug_shape_custom_color = Color( 0.819608, 0.14902, 0.14902, 0.807843 )
+debug_shape_thickness = 5
+
+[node name="CoverRaycasts" type="Spatial" parent="."]
+
+[node name="LeftCoverRaycast" type="RayCast" parent="CoverRaycasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, -1.662, 0.778, -0.211173 )
+enabled = true
+cast_to = Vector3( 0, 0, -1.5 )
+collision_mask = 4
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
+
+[node name="RightCoverRaycast" type="RayCast" parent="CoverRaycasts"]
+transform = Transform( 1, 0, 0, 0, 1, 0, 0, 0, 1, 1.662, 0.778, -0.211173 )
+enabled = true
+cast_to = Vector3( 0, 0, -1.5 )
+collision_mask = 4
+debug_shape_custom_color = Color( 1, 0, 0, 1 )
+debug_shape_thickness = 5
+
+[node name="NightVisionGrainy" parent="." instance=ExtResource( 9 )]
+
+[node name="NightVisionGrainyAlt" parent="." instance=ExtResource( 8 )]
 
 [node name="HUD" parent="." instance=ExtResource( 3 )]
 

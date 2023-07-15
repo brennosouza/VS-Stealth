@@ -47,8 +47,10 @@ onready var interactraycast = $"Camroot/Helper/Camera/InteractRaycast"
 #var LOOKAROUND_SPEED = 0.2
 
 var wallhug_mode = false
-onready var left_cover_raycast : RayCast = $Camroot/Helper/Camera/CoverRaycasts/LeftCoverRaycast 
-onready var right_cover_raycast : RayCast = $Camroot/Helper/Camera/CoverRaycasts/RightCoverRaycast 
+onready var cover_raycast_holder = $CoverRaycasts
+onready var left_cover_raycast : RayCast = cover_raycast_holder.get_node("LeftCoverRaycast")
+onready var right_cover_raycast : RayCast = cover_raycast_holder.get_node("RightCoverRaycast")
+var raycasts_rotation
 
 
 func _init():
@@ -74,6 +76,9 @@ func _physics_process(delta):
 	var moving = false
 #	crouching = false
 	current_speed = walking_speed
+	
+	if wallhug_mode:
+		cover_raycast_holder.rotation = raycasts_rotation
 	
 	interact_raycast()
 	
@@ -119,12 +124,15 @@ func _physics_process(delta):
 		else:
 			worldenvironment.environment.ambient_light_color = Color("000000")
 	if Input.is_action_just_pressed("cover"):
-		if wallhug_mode:
-			wallhug_mode = false
-		if $Camroot/Helper/Camera/CoverRaycast.is_colliding():
+		if $Camroot/Helper/Camera/CoverRaycast.is_colliding() and !wallhug_mode:
 			print_debug($Camroot/Helper/Camera/CoverRaycast.get_collision_normal())
+			cover_raycast_holder.look_at(cover_raycast_holder.global_transform.origin - $Camroot/Helper/Camera/CoverRaycast.get_collision_normal(), Vector3.UP)
 			print_debug(global_transform.basis.z)
 			wallhug_mode = true
+			raycasts_rotation = cover_raycast_holder.rotation
+		elif wallhug_mode:
+			wallhug_mode = false
+		
 			
 		
 		
@@ -134,8 +142,11 @@ func _physics_process(delta):
 		gravity.y = -1
 #		direction.y = -1
 		
-	
-	direction = direction.rotated(Vector3.UP, h_rot).normalized()
+	if wallhug_mode:
+		var wall_h_rot = cover_raycast_holder.global_transform.basis.get_euler().y
+		direction = direction.rotated(Vector3.UP, wall_h_rot).normalized()
+	else:
+		direction = direction.rotated(Vector3.UP, h_rot).normalized()
 	if direction != Vector3.ZERO:
 		facing = direction
 	
@@ -154,7 +165,10 @@ func _physics_process(delta):
 		else:
 			playfootsteps(false)
 	
-	#Rotação de mesh/player, usar se necessário
+	elif !moving:
+		current_speed = 0
+	
+	#RotaÃ§Ã£o de mesh/player, usar se necessÃ¡rio
 #	if direction != Vector3.ZERO:
 	$MeshInstance.rotation.y = lerp_angle($MeshInstance.rotation.y, atan2(-facing.x, -facing.z) - rotation.y, delta * angular_acceleration)
 #	print_debug($MeshInstance.rotation.y)
@@ -199,6 +213,10 @@ func _physics_process(delta):
 		elif not reloading and current_ammo <= 0:
 			$Camroot/Helper/Camera/Gun/emptysound.play()
 		
+	
+	calculate_loudness()
+	
+	
 #		$Camroot/Helper.rotation_degrees.x = lerp($Camroot/Helper.rotation_degrees.x, $Camroot/Helper.rotation_degrees.x-5.05, delta )
 		
 #	if movement.x != 0 || movement.x != 0:
@@ -230,7 +248,15 @@ func _unhandled_input(event):
 		flashlight.visible = !flashlight.visible
 			
 		
+
+func calculate_loudness():
+	#Add floor type raycast and calculate floor type sound bonus
+	if crouching:
+		$SoundCircle/SoundArea/SoundCollision.shape.radius = 1 
+	else:
+		$SoundCircle/SoundArea/SoundCollision.shape.radius = current_speed #+ floor type bonus
 		
+	$SoundCircle/SoundTorus.scale = Vector3(current_speed/10, current_speed/10, current_speed/10)  #+ floor type bonus
 
 
 func playfootsteps(wait):
